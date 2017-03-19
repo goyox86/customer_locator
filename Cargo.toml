@@ -4,3 +4,7 @@ version = "0.1.0"
 authors = ["Jose Narvaez <goyox86@gmail.com>"]
 
 [dependencies]
+serde = "0.9"
+serde_derive = "0.9"
+serde_json = "0.9"
+clap = "2.21.1"
