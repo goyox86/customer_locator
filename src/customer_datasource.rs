@@ -12,7 +12,7 @@ pub trait CustomerDatasource {
 }
 
 pub struct CustomerJSONFile<'f> {
-    file_path: &'f Path
+    file_path: &'f Path,
 }
 
 impl<'f> CustomerJSONFile<'f> {

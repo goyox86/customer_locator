@@ -6,7 +6,7 @@ pub struct Customer {
     pub user_id: i64,
     pub name: String,
     pub latitude: f64,
-    pub longitude: f64
+    pub longitude: f64,
 }
 
 impl Customer {
@@ -16,7 +16,7 @@ impl Customer {
             user_id: user_id,
             name: name,
             latitude: location.latitude,
-            longitude: location.longitude
+            longitude: location.longitude,
         }
     }
 

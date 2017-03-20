@@ -23,7 +23,7 @@ const DEFAULT_CUSTOMERS_FILE: &str = "data/customers.json";
 const DEFAULT_RADIUS: &str = "100";
 
 fn main() {
-     let matches = App::new("CustomerLocator")
+    let matches = App::new("CustomerLocator")
                         .version("1.0")
                         .author("Jose Narvaez. <goyox86@gmail.com>")
                         .about("Locates customers near Dublin.")
@@ -53,11 +53,11 @@ fn main() {
     // Parsing radius of the search
     let radius_str = matches.value_of("radius").unwrap();
     let radius = match f64::from_str(radius_str) {
-       Ok(radius) => radius,
-       Err(err) => {
-           println!("Invalid radius: {}", err);
-           return;
-       }
+        Ok(radius) => radius,
+        Err(err) => {
+            println!("Invalid radius: {}", err);
+            return;
+        }
     };
 
     let customers_json_file = CustomerJSONFile::new(Path::new(input_file_path));
@@ -69,8 +69,9 @@ fn main() {
 
     for customer in customers {
         let dist_from_dublin = customer.location().distance_from(&dublin);
-        println!("Distance from Dublin for {}: {} is {}", customer.name, customer.user_id, dist_from_dublin);
+        println!("Distance from Dublin for {}: {} is {}",
+                 customer.name,
+                 customer.user_id,
+                 dist_from_dublin);
     }
 }
-
-

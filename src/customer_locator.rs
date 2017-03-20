@@ -4,7 +4,7 @@ use units::Kilometers;
 use customer_datasource::CustomerDatasource;
 
 pub struct CustomerLocator {
-    pub customers: Vec<Customer>
+    pub customers: Vec<Customer>,
 }
 
 impl CustomerLocator {
@@ -17,7 +17,9 @@ impl CustomerLocator {
     }
 
     pub fn locate_within(&self, radius: &Kilometers, location: &Location) -> Vec<Customer> {
-        self.customers.clone().into_iter()
+        self.customers
+            .clone()
+            .into_iter()
             .filter(|customer| customer.distance_from(location) < *radius)
             .collect::<Vec<Customer>>()
     }
