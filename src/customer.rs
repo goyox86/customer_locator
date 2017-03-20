@@ -1,5 +1,5 @@
 use location::Location;
-use location::Kilometers;
+use units::Kilometers;
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Customer {
