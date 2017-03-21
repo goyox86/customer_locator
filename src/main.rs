@@ -27,7 +27,7 @@ fn main() {
     let matches = App::new("CustomerLocator")
         .version("0.1.0")
         .author("Jose Narvaez. <goyox86@gmail.com>")
-        .about("Locates customers near a given location.")
+        .about("Locates customers near a given location. Dublin, Ireland by default")
         .arg(Arg::with_name("file")
             .short("f")
             .long("file")
@@ -74,17 +74,29 @@ fn main() {
         }
     };
 
+    // Building our datasource (A JSON file in this case)
     let customers_json_file = CustomerJSONFile::new(Path::new(input_file_path));
-    let locator = CustomerLocator::from_source(customers_json_file);
+
+    // Building the locator
+    let locator = match CustomerLocator::from_source(customers_json_file) {
+        Ok(locator) => locator,
+        Err(err) => {
+            println!("{}", err);
+            return;
+        }
+    };
 
     let mut customers = locator.locate_within(&Kilometers(radius), &location);
     customers.sort_by_user_id();
 
+    if location.is_dublin() {
+        println!("Location is (Dublin, Ireland) {}.", location);
+    } else {
+        println!("Location is {}.", location);
+    }
+
     for customer in customers {
-        let dist_from_dublin = customer.location().distance_from(&location);
-        println!("Distance from Dublin for {}: {} is {}",
-                 customer.name,
-                 customer.user_id,
-                 dist_from_dublin);
+        let dist_from_location = customer.location().distance_from(&location);
+        println!("{} is {} from provided location.", customer, dist_from_location);
     }
 }
