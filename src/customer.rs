@@ -28,3 +28,24 @@ impl Customer {
         self.location().distance_from(&location)
     }
 }
+
+pub struct CustomerList(Vec<Customer>);
+
+impl CustomerList {
+    pub fn from_vec(customers: Vec<Customer>) -> CustomerList {
+        CustomerList(customers)
+    }
+
+    pub fn sort_by_user_id(&mut self) {
+         self.0.as_mut_slice().sort_by(|first, second| first.user_id.cmp(&second.user_id));
+    }
+}
+
+impl IntoIterator for CustomerList {
+    type Item = Customer;
+    type IntoIter = ::std::vec::IntoIter<Customer>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
+    }
+}

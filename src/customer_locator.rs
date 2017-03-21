@@ -1,4 +1,5 @@
 use customer::Customer;
+use customer::CustomerList;
 use location::Location;
 use units::Kilometers;
 use customer_datasource::CustomerDatasource;
@@ -16,11 +17,13 @@ impl CustomerLocator {
         Self::new(source.customers())
     }
 
-    pub fn locate_within(&self, radius: &Kilometers, location: &Location) -> Vec<Customer> {
-        self.customers
+    pub fn locate_within(&self, radius: &Kilometers, location: &Location) -> CustomerList {
+        let customers_vec = self.customers
             .clone()
             .into_iter()
             .filter(|customer| customer.distance_from(location) < *radius)
-            .collect::<Vec<Customer>>()
+            .collect::<Vec<Customer>>();
+
+        CustomerList::from_vec(customers_vec)
     }
 }

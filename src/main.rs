@@ -78,7 +78,7 @@ fn main() {
     let locator = CustomerLocator::from_source(customers_json_file);
 
     let mut customers = locator.locate_within(&Kilometers(radius), &location);
-    customers.as_mut_slice().sort_by(|first, second| first.user_id.cmp(&second.user_id));
+    customers.sort_by_user_id();
 
     for customer in customers {
         let dist_from_dublin = customer.location().distance_from(&location);
