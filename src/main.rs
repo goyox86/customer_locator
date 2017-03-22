@@ -1,3 +1,16 @@
+// Copyright 2017 Jose Narvaez. See the COPYRIGHT
+// file at the top-level directory of this distribution.
+//
+// Licensed under the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>.
+// This file may not be copied, modified, or distributed
+// except according to those terms
+
+///
+/// A small CLI application to locate customers nearby a given Location.
+/// Originally written to search for people in a radius of 100km of the
+/// center of Dublin, Ireland.
+///
 #[macro_use]
 extern crate serde_derive;
 extern crate serde_json;
@@ -11,13 +24,14 @@ use clap::{App, Arg};
 mod customer;
 mod customer_locator;
 mod customer_datasource;
+mod customer_json_file;
 mod location;
 mod units;
 
 use location::Location;
 use units::Kilometers;
 use customer_locator::CustomerLocator;
-use customer_datasource::CustomerJSONFile;
+use customer_json_file::CustomerJsonFile;
 
 const DEFAULT_ARG_CUSTOMERS_FILE: &str = "data/customers.json";
 const DEFAULT_ARG_RADIUS_IN_KM: &str = "100";
@@ -75,7 +89,7 @@ fn main() {
     };
 
     // Building our datasource (A JSON file in this case)
-    let customers_json_file = CustomerJSONFile::new(Path::new(input_file_path));
+    let customers_json_file = CustomerJsonFile::new(Path::new(input_file_path));
 
     // Building the locator
     let locator = match CustomerLocator::from_source(customers_json_file) {
