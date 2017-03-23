@@ -85,4 +85,4 @@ Send a PR! We don't bite ;)
 
 CustomerLocator is licensed under either of the following, at your option:
 
- * MIT License ([COPYRIGHT](COPYRIGHT) or http://opensource.org/licenses/MIT)
+ * MIT License ([COPYRIGHT](COPYRIGHT) or http://opensource.org/liacenses/MIT)
