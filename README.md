@@ -6,7 +6,7 @@ in Kilometers.
 
 ## Design
 
-If you are interested on the design considerations take a look at DESIGN.md.
+If you are interested on the design considerations take a look at [DESIGN](DESIGN.md).
 
 ## Building and Running
 
