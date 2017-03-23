@@ -57,7 +57,9 @@ concept of a "list of customers" needs to be returned, stored or passed
 around. It is similar to "Kilometers" in the sense that is a NewType that
 hides the concrete implementation of the data structure that holds the
 customers allowing it to be swapped without propagating a cascade of
-changes across module boundary.
+changes across module boundary. It is meant to hold all the behavior
+that is related to a set of customers but that does not involve geographic
+operations.
 
 - CustomerDatasource: This is the interface that will allow the system to
 support many different formats without requiring any change on the rest of it.

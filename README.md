@@ -33,6 +33,12 @@ using `cargo`:
 $ cargo run
 ```
 
+You can pass options to the application with `--` like:
+
+```sh
+$ cargo run -- -r 50 # change the default radius to 50 km
+```
+
 ## Tests
 
 You can run the test suite with:
