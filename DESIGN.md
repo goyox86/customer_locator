@@ -20,12 +20,12 @@ high level languages as I wanted it to be fast so you could load very big JSON
 files with a low memory footprint. The fact that it parses potentially 
 untrusted data made me think on the security aspect, hence an attacker controlling
 the input could try to exploit vulnerabilities which are simply not possible in Rust 
-(I was thinking on doing it in Ruby but JSON parsing in Ruby if you wnat it fast you 
+(I was thinking on doing it in Ruby but JSON parsing in Ruby if you want it fast you 
 end up using a gem that is implemented as a C entension, and there is where the 
-vulnerability could arise). Along with all of that you will see that despite being
-a language that gives you a lot of control it has very high level constructs that 
-make it feel like a higher level language, and the implementation is just a few lines
-including tests and error handling. Iterators, Macros and Custom derives
+vulnerability could arise). Along with all of that, you will see that despite being
+a language that gives you a lot of low level control it has very high level constructs
+that  make it feel like a higher level language, and the implementation is just 
+a few lines including tests and error handling. Iterators, Macros and Custom derives
 (that allow toll free derived implementation of the JSON serializing/deserializing),
 Type Classes and a very powerful type system with traits that are similar to 
 interfaces in other languages that enable you to open the withdow for extension
@@ -33,7 +33,12 @@ even though enforcing a contract.
 
 ## Design
 
-The design is very simple. First of all. There are some core entities related to
+The design is simple. It may look overkill at first sight but if I would develop 
+a production system it would do it this way so the system is closed to modification
+but open for future extension. I was particularly careful segregating 
+responsibilities across entities.
+
+First of all. There are some core entities related to
 the data model:
 
 - Location: Abstracts the concept of a location on earth surface given latitude,
