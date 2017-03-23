@@ -134,8 +134,8 @@ mod tests {
     use customer::CustomerList;
     use location::Location;
 
-    const CUSTOMERS_OK_JSON_FILE: &str = "tests/fixtures/customers.json";
-    const CUSTOMERS_BAD_JSON_FILE: &str = "tests/fixtures/customers_malformed.json";
+    const CUSTOMERS_OK_JSON_FILE: &'static str = "tests/fixtures/customers.json";
+    const CUSTOMERS_BAD_JSON_FILE: &'static str = "tests/fixtures/customers_malformed.json";
 
     #[test]
     fn customer_json_file_builds_a_customer_list_from_a_json_file() {

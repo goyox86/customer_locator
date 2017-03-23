@@ -33,9 +33,9 @@ use units::Kilometers;
 use customer_locator::CustomerLocator;
 use customer_json_file::CustomerJsonFile;
 
-const DEFAULT_ARG_CUSTOMERS_FILE: &str = "data/customers.json";
-const DEFAULT_ARG_RADIUS_IN_KM: &str = "100";
-const DEFAULT_ARG_LOCATION: &str = "53.3393,-6.2576841"; // Dublin
+const DEFAULT_ARG_CUSTOMERS_FILE: &'static str = "data/customers.json";
+const DEFAULT_ARG_RADIUS_IN_KM: &'static str = "100";
+const DEFAULT_ARG_LOCATION: &'static str = "53.3393,-6.2576841"; // Dublin
 
 fn main() {
     let matches = App::new("CustomerLocator")
@@ -63,6 +63,10 @@ fn main() {
             .help("The location for what customers are gonna be located. In the format latitude,longitude.")
             .default_value(DEFAULT_ARG_LOCATION)
             .takes_value(true))
+        .arg(Arg::with_name("quiet")
+            .short("q")
+            .long("quiet")
+            .help("Don't print anything to stdout. Used when benchmarking, so we don't wait on stdout flushing."))
         .get_matches();
 
     // Parsing input file name
@@ -103,6 +107,10 @@ fn main() {
     let mut customers = locator.locate_within(&Kilometers(radius), &location);
     customers.sort_by_user_id();
 
+    // this is just to be able to measure raw perf of customer parsing and actual
+    // calculations excluding IO at the end.
+    if matches.is_present("quiet") { return; }
+
     if location.is_dublin() {
         println!("Location is (Dublin, Ireland) {}.", location);
     } else {
@@ -110,7 +118,7 @@ fn main() {
     }
 
     for customer in customers {
-        let dist_from_location = customer.location().distance_from(&location);
+        let dist_from_location = customer.distance_from(&location);
         println!("{} is {} from provided location.", customer, dist_from_location);
     }
 }
