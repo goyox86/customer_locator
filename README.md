@@ -74,7 +74,7 @@ $ time cargo run --release -- -f data/customers_huge.json -q # note the -q for '
 Now we are in subsecond times \o/:
 
 ```bash
-cargo run --release -- -f data/customers_huge.json -q  0.86s user 0.15s system 84% cpu 1.195 total
+$ cargo run --release -- -f data/customers_huge.json -q  0.86s user 0.15s system 84% cpu 1.195 total
 ```
 
 ## Contributing
