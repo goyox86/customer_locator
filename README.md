@@ -47,6 +47,36 @@ You can run the test suite with:
 $ cargo test
 ```
 
+## Performance
+
+Simple tests show that CustomerLocator can parse and locate 1 million customers in less than 2 seconds.
+with most of the time spent on IO pushing results to stdout.
+
+You can run it on your own the 'customers_huge.json' file is provided compressed with the distribution.
+
+NOTE: The --release flag is key as it will enable compiler optimizations.
+
+```sh
+$ time cargo run --release -- -f data/customers_huge.json
+```
+
+```sh
+$ cargo run --release -- -f data/customers_huge.json  1.80s user 0.82s system 56% cpu 4.610 total
+```
+
+When we don't print results to stdout things get a lot faster:
+
+
+```bash
+$ time cargo run --release -- -f data/customers_huge.json -q # note the -q for 'quiet' mode so we don't go to stdout
+```
+
+Now we are in subsecond times \o/:
+
+```bash
+cargo run --release -- -f data/customers_huge.json -q  0.86s user 0.15s system 84% cpu 1.195 total
+```
+
 ## Contributing
 
 Send a PR! We don't bite ;)
